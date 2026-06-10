@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoMail XP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">AM</div>
+      <div class="logo-name">AutoMail <span>XP</span></div>
+    </div>
+    <div class="theme-toggle">
+      <button class="theme-btn active" id="btn-dark" onclick="setTheme('dark')" title="Tema escuro">🌙</button>
+      <button class="theme-btn" id="btn-light" onclick="setTheme('light')" title="Tema claro">☀️</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- DADOS DO CLIENTE -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Dados do Cliente</span>
+    </div>
+    <div class="card-body">
+      <div class="fields-grid">
+        <div class="field">
+          <label>Nome do Cliente</label>
+          <input type="text" id="clientName" placeholder="Ex: João Silva" oninput="onFormChange()">
+        </div>
+        <div class="field">
+          <label>Código XP</label>
+          <input type="text" id="clientCode" placeholder="Ex: 123456" oninput="onFormChange()">
+        </div>
+        <div class="field">
+          <label>E-mail do Cliente</label>
+          <input type="email" id="clientEmail" placeholder="cliente@email.com" oninput="onFormChange()">
+        </div>
+        <div class="field">
+          <label>Nome do Assessor</label>
+          <input type="text" id="advisorName" placeholder="Ex: Maria Santos" oninput="onFormChange()">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPERAÇÕES -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Operações</span>
+      <button class="btn-add" onclick="addOperation()"><span>＋</span> Adicionar Ativo</button>
+    </div>
+    <div class="card-body" style="padding:16px 20px">
+      <div class="ops-list" id="opsList"></div>
+      <div id="opsEmpty" class="empty-state">
+        <div class="empty-icon">📋</div>
+        Nenhuma operação adicionada.<br>Clique em "Adicionar Ativo" para começar.
+      </div>
+    </div>
+  </div>
+
+  <!-- GERAR -->
+  <button class="btn-generate" id="btnGenerate" onclick="generateEmail()" disabled>
+    ⚡ Gerar E-mail
+  </button>
+
+  <!-- PRÉVIA -->
+  <div class="card" id="previewCard" style="display:none">
+    <div class="card-header">
+      <span class="card-title">Prévia do E-mail</span>
+    </div>
+    <div class="preview-meta">
+      <div class="meta-row">
+        <span class="meta-label">Para</span>
+        <span class="meta-value" id="prevTo">—</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label">Assunto</span>
+        <span class="meta-value" id="prevSubject">—</span>
+      </div>
+      <div class="preview-actions">
+        <button class="btn-action btn-copy" id="btnCopySubject" onclick="copySubject()">📋 Copiar Assunto</button>
+        <button class="btn-action btn-copy" id="btnCopyContent" onclick="copyContent()">📄 Copiar HTML</button>
+        <button class="btn-action btn-outlook" onclick="exportEml()">📧 Abrir no Outlook</button>
+      </div>
+    </div>
+    <iframe id="previewFrame" class="preview-frame" sandbox="allow-same-origin"></iframe>
+  </div>
+
+</main>
+
+<div class="toast" id="toast">
+  <div class="toast-dot"></div>
+  <span id="toastMsg">Copiado!</span>
+</div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
